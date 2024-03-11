@@ -5,10 +5,12 @@ from rest_framework import viewsets
 from rest_framework import status
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from rest_framework import permissions
 
 class UserRegistrationAPIView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
+    permission_classes = [permissions.AllowAny]
 
 
 class UserLoginAPIView(viewsets.ModelViewSet):
