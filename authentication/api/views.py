@@ -3,6 +3,7 @@ from authentication.api.serializer import UserSerializer
 from authentication.models import UserModel
 from rest_framework import viewsets
 from rest_framework import status
+from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework import permissions
@@ -13,9 +14,9 @@ class UserRegistrationAPIView(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-class UserLoginAPIView(viewsets.ModelViewSet):
+class UserLoginAPIView(APIView):
     
-    def create(self, request, *args, **kwargs):
+    def post(self, request):
         username = request.data["username"]
         password = request.data["password"]
 
@@ -24,6 +25,9 @@ class UserLoginAPIView(viewsets.ModelViewSet):
 
         if user:
             token, created = Token.objects.get_or_create()
+            return Response({"token" : token.key, "created":created})
+        else:
+            return Response({"error": "Invalid credentials. Plese enter valid username and passwod"}, status=401)
             
 
 

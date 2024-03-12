@@ -12,12 +12,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def validate(self, data):
-        if data["userCountry"]:
-            return Response({"error": "User coutry is required!"})
-        elif data["userAge"]:
-            return Response({"error": "User Age is required!"})
+        username = data["username"]
+        email = data["email"]
+
+        print(f"USERNAME = {username}")
+
+        if UserModel.objects.filter(email=email).exists():
+            raise serializers.ValidationError({"error":"A user with the email already exists!"})
+        
+        return data
 
     def create(self, validated_data):
-        return UserModel.objects.create(**validated_data)
+        return UserModel.objects.create_user(**validated_data)
 
     # ** unpacks the dictionary as validated data is a dictionary in in the create method.

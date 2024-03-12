@@ -27,13 +27,14 @@ urlpatterns = [
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from django.contrib import admin 
-from authentication.api import views
+from authentication.api.views import UserRegistrationAPIView, UserLoginAPIView
 
 router = DefaultRouter()
-router.register("registration/", views.UserRegistrationAPIView, basename="registration")
+router.register("registration", UserRegistrationAPIView, basename="registration")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('jobFinder/login/', UserLoginAPIView.as_view(), name='loginView'),
     path("jobFinder/", include(router.urls)),
 ]
 
