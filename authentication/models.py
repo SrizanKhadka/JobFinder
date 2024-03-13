@@ -7,6 +7,6 @@ USERTYPE = [("Employee", "EMPLOYEE"), ("Employer", "EMPLOYER")]
 
 
 class UserModel(AbstractUser):
-    userCountry = models.CharField(max_length=20,null=True)
-    userAge = models.IntegerField(null=True)
+    userCountry = models.CharField(max_length=20,null=True,blank=True)
+    userAge = models.IntegerField(null=True,blank=True)
     userType = models.CharField(max_length=10,choices = USERTYPE,default = "Employee")

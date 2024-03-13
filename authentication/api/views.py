@@ -24,7 +24,7 @@ class UserLoginAPIView(APIView):
         print(f"Logging in with username = {username} and password = {password}")
 
         if user:
-            token, created = Token.objects.get_or_create()
+            token, created = Token.objects.get_or_create(user=user)
             return Response({"token" : token.key, "created":created})
         else:
             return Response({"error": "Invalid credentials. Plese enter valid username and passwod"}, status=401)
