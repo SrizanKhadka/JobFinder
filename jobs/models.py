@@ -21,7 +21,7 @@ class JobModel(models.Model):
     jobDescription = models.TextField()
     jobRequirements = models.TextField()
     location = models.CharField(max_length=100)
-    jobIndustry = models.ForeignKey(JobIndustry,on_delete=models.CASCADE)
+    jobIndustry = models.ForeignKey(JobIndustry,on_delete=models.CASCADE,related_name="jobIndustry")
     jobType = models.CharField(max_length=20,choices=JOB_TYPE,default="full_time")
     benefits = models.TextField()
     salary = models.CharField(max_length=100, blank=True, null=True)  # Optional field for salary

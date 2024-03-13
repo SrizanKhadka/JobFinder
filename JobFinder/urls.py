@@ -28,9 +28,11 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from django.contrib import admin 
 from authentication.api.views import UserRegistrationAPIView, UserLoginAPIView
+from jobs.api.views import CreateJobsView
 
 router = DefaultRouter()
 router.register("registration", UserRegistrationAPIView, basename="registration")
+router.register("jobs", CreateJobsView, basename="createJobs")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
