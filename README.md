@@ -1,19 +1,18 @@
 JobFinder, A practice project in Python Django.
 
 What will be on JobFinder?
-Job Listings:
-Endpoint to retrieve a list of job postings.
-Ability to filter jobs based on criteria such as location, industry, job type, etc.
-Pagination for handling large numbers of job listings.
-
-Job Details:
-Endpoint to retrieve detailed information about a specific job.
-Include details like job description, requirements, benefits, and application instructions.
-
 
 User Authentication:
 Implement user authentication to allow companies to post job listings and users to apply for jobs.
 Differentiate between employer accounts and regular user accounts.
+
+
+Job Listings and Details:
+Endpoint to retrieve a list of job and it's details postings.
+Include details like job description, requirements, benefits, and application instructions.
+Ability to filter jobs based on criteria such as location, industry, job type, etc.
+Pagination for handling large numbers of job listings.
+
 
 Job Applications:
 Allow users to submit applications for jobs.
