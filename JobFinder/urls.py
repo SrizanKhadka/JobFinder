@@ -28,7 +28,7 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from django.contrib import admin 
 from authentication.api.views import UserRegistrationAPIView, UserLoginAPIView
-from jobs.api.views import CreateJobsView
+from jobs.api.views import *
 
 router = DefaultRouter()
 router.register("registration", UserRegistrationAPIView, basename="registration")

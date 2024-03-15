@@ -1,4 +1,5 @@
 from django.db import models
+from authentication.models import UserModel
 
 # Create your models here.
 
@@ -17,24 +18,21 @@ class JobIndustry(models.Model):
         return self.industryName
 
 class JobModel(models.Model):
+    user = models.ForeignKey(UserModel,on_delete=models.CASCADE,related_name="jobCreator",null=True)
     jobTitle = models.CharField(max_length=100)
     company = models.CharField(max_length=50)
     jobDescription = models.TextField()
     jobRequirements = models.TextField()
     location = models.CharField(max_length=100)
-    #jobIndustry = models.ForeignKey(JobIndustry,on_delete=models.CASCADE,related_name="jobIndustry")
-    jobIndustry = models.OneToOneField(JobIndustry,on_delete=models.CASCADE,related_name="jobModel")
+    jobIndustry = models.ForeignKey(JobIndustry,on_delete=models.CASCADE,related_name="jobIndustry")
     jobType = models.CharField(max_length=20,choices=JOB_TYPE,default="full_time")
     benefits = models.TextField()
-    salary = models.CharField(max_length=100, blank=True, null=True)  # Optional field for salary
+    salary = models.CharField(max_length=100, blank=True, null=True) 
     applicationInstructions = models.TextField()
     contactInformation = models.TextField()
     publishedDate = models.DateTimeField(auto_now_add=True)
     updatedDate = models.DateTimeField(auto_now=True)
     expirationDate = models.DateTimeField()
-    filter_location = models.CharField(max_length=100, blank=True, null=True)
-    filter_industry = models.ForeignKey(JobIndustry, on_delete=models.CASCADE, related_name='jobs_filtered', blank=True, null=True)
-    filter_job_type = models.CharField(max_length=20, choices=JOB_TYPE, default="FULL_TIME", blank=True, null=True)
 
     def __str__(self):
         return f"{self.jobTitle} - {self.company}"
