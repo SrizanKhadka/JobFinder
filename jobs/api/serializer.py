@@ -11,7 +11,7 @@ class JobIndustrySerializer(serializers.ModelSerializer):
 
 
 #with default create method.
-class JobSerializer(serializers.ModelSerializer):
+class JobSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
 
     jobIndustry = JobIndustrySerializer()
     jobCreator = serializers.StringRelatedField()
@@ -24,8 +24,7 @@ class JobSerializer(serializers.ModelSerializer):
         job_industry_data = validated_data.pop('jobIndustry')
         print(f"JOB_INDUSTRY_DATA = {job_industry_data}")
         job_industry, created = JobIndustry.objects.get_or_create(**job_industry_data)
-        job = JobModel.objects.create(
-            jobIndustry=job_industry, **validated_data)
+        job = JobModel.objects.create(jobIndustry=job_industry, **validated_data)
         return job
 
 
