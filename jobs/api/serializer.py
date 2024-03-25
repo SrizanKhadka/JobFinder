@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from jobs.models import JobModel, JobIndustry
+from jobs.models import *
 from drf_writable_nested import WritableNestedModelSerializer
 
 
@@ -26,6 +26,15 @@ class JobSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
         job_industry, created = JobIndustry.objects.get_or_create(**job_industry_data)
         job = JobModel.objects.create(jobIndustry=job_industry, **validated_data)
         return job
+    
+class ApplicationSerializer(serializers.ModelSerializer):
+
+    job = JobSerializer()
+
+    class Meta:
+        model = ApplicationModel
+        fields = "__all__"
+        
 
 
  

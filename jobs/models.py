@@ -10,6 +10,12 @@ JOB_TYPE = [
     ("INTERNSHIP","internship")
 ]
 
+APPLICATION_STATUS = [
+    ("IN REVIEW","in review"),
+    ("APPROVED","approved"),
+    ("DENIED","denied")
+]
+
 class JobIndustry(models.Model):
     industryName = models.CharField(max_length=20)
 
@@ -37,4 +43,13 @@ class JobModel(models.Model):
     def __str__(self):
         return f"{self.jobTitle} - {self.company}"
 
+
+class ApplicationModel(models.Model):
+    job = models.ForeignKey(JobModel,on_delete=models.CASCADE,related_name="job")
+    application = models.TextField()
+    status = models.CharField(max_length=20,choices=APPLICATION_STATUS,default="in review")
+
+    def __str__(self):
+        return self.jobId.jobTitle
+    
     

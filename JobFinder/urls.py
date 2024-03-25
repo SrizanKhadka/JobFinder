@@ -33,6 +33,7 @@ from jobs.api.views import *
 router = DefaultRouter()
 router.register("registration", UserRegistrationAPIView, basename="registration")
 router.register("jobs", CreateJobsView, basename="createJobs")
+router.register("applications",CreateApplicationsView,basename="applicationsView")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
