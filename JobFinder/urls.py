@@ -38,6 +38,6 @@ router.register("applications",CreateApplicationsView,basename="applicationsView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('jobFinder/login/', UserLoginAPIView.as_view(), name='loginView'),
-    path("jobFinder/", include(router.urls)),
+    path("jobFinder/", include(router.urls))
 ]
 

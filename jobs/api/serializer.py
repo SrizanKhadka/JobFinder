@@ -9,7 +9,6 @@ class JobIndustrySerializer(serializers.ModelSerializer):
         model = JobIndustry
         fields = "__all__"
 
-
 #with default create method.
 class JobSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
 
@@ -27,13 +26,13 @@ class JobSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
         job = JobModel.objects.create(jobIndustry=job_industry, **validated_data)
         return job
     
-class ApplicationSerializer(serializers.ModelSerializer):
 
-    job = JobSerializer()
+class ApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ApplicationModel
         fields = "__all__"
+
         
 
 

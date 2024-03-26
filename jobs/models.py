@@ -16,6 +16,8 @@ APPLICATION_STATUS = [
     ("DENIED","denied")
 ]
 
+
+
 class JobIndustry(models.Model):
     industryName = models.CharField(max_length=20)
 
@@ -44,12 +46,15 @@ class JobModel(models.Model):
         return f"{self.jobTitle} - {self.company}"
 
 
+
 class ApplicationModel(models.Model):
-    job = models.ForeignKey(JobModel,on_delete=models.CASCADE,related_name="job")
+    job = models.ForeignKey(JobModel,on_delete=models.CASCADE,related_name="job_application",null=True)
     application = models.TextField()
+    user = models.ForeignKey(UserModel,on_delete=models.CASCADE,related_name="applicant",null=True)
     status = models.CharField(max_length=20,choices=APPLICATION_STATUS,default="in review")
 
     def __str__(self):
-        return self.jobId.jobTitle
+        return self.job.jobTitle
+
     
     

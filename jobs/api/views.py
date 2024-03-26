@@ -5,15 +5,20 @@ from rest_framework import permissions
 from jobs.api.permissons import IsJobCreatorOrEmployer,IsApplicant
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
+from django_filters import rest_framework as filters
+
+
 
 class CreateJobsView(viewsets.ModelViewSet):
     serializer_class = JobSerializer
     queryset = JobModel.objects.all()
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsJobCreatorOrEmployer]
     pagination_class = PageNumberPagination
+    pagination_class.page_size = 10
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
         
     def update(self, request, *args, **kwargs):
         print(f"PRIMARY KEY = {kwargs['pk']}")
@@ -31,10 +36,16 @@ class CreateApplicationsView(viewsets.ModelViewSet):
     serializer_class = ApplicationSerializer
     queryset = ApplicationModel.objects.all()
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('job',)
 
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
-
+    
+    def list(self, request, *args, **kwargs):
+       response = super().list(request, *args, **kwargs)
+       return Response(
+           {"data":response.data,"message":"All applications"}
+       )
    
