@@ -4,8 +4,6 @@ from drf_writable_nested import WritableNestedModelSerializer
 from drf_writable_nested.mixins import UniqueFieldsMixin
 from django.core.exceptions import ObjectDoesNotExist
 
-#using writableNestedModelSerializer.
-    
 class JobSerializer(serializers.ModelSerializer):
 
     # jobIndustry = JobIndustrySerializer()
@@ -15,9 +13,10 @@ class JobSerializer(serializers.ModelSerializer):
         model = JobModel
         fields = "__all__"
 
+#using writableNestedModelSerializer.
 class JobIndustrySerializer(WritableNestedModelSerializer):
-
-    jobModel = JobSerializer()
+    
+    jobIndustry = JobSerializer(many=True,read_only=True)
 
     class Meta:
         model = JobIndustry
@@ -31,9 +30,7 @@ class JobIndustrySerializer(WritableNestedModelSerializer):
     #     except ObjectDoesNotExist:
     #         # else, we create a new tag with the given value
     #         return super(JobIndustrySerializer, self).create(validated_data)
-
-
-
+    
 
 
 #with default create method.

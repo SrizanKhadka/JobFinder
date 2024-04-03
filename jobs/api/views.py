@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from jobs.api.serializer import JobIndustrySerializer
+from jobs.api.serializer import JobIndustrySerializer,JobSerializer
 from jobs.models import JobModel, JobIndustry
 from rest_framework import permissions
 
