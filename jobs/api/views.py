@@ -1,11 +1,6 @@
 from rest_framework import viewsets
-<<<<<<< HEAD
-from jobs.api.serializer import JobIndustrySerializer,JobSerializer
-from jobs.models import JobModel, JobIndustry
-=======
 from jobs.api.serializer import JobSerializer,ApplicationSerializer
 from jobs.models import JobModel,ApplicationModel
->>>>>>> 813aeef8fc55d865ea01ce89879118d6cabd0f7f
 from rest_framework import permissions
 from jobs.api.permissons import IsJobCreatorOrEmployer,IsApplicant
 from rest_framework.response import Response

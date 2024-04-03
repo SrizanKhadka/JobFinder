@@ -2,43 +2,13 @@ from rest_framework import serializers
 from jobs.models import *
 from drf_writable_nested import WritableNestedModelSerializer
 
-<<<<<<< HEAD
-class JobSerializer(serializers.ModelSerializer):
-
-    # jobIndustry = JobIndustrySerializer()
-    # jobIndustry = serializers.StringRelatedField()
-
-    class Meta:
-        model = JobModel
-        fields = "__all__"
-
-#using writableNestedModelSerializer.
-class JobIndustrySerializer(WritableNestedModelSerializer):
-    
-    jobIndustry = JobSerializer(many=True,read_only=True)
-=======
 
 class JobIndustrySerializer(serializers.ModelSerializer):
->>>>>>> 813aeef8fc55d865ea01ce89879118d6cabd0f7f
 
     class Meta:
         model = JobIndustry
         fields = "__all__"
 
-<<<<<<< HEAD
-    # def create(self, validated_data):
-    #     try:
-    #         # if there is already an instance in the database with the
-    #         # given value (e.g. industryName='Finance'), we simply return this instance
-    #         return JobIndustry.objects.get(industryName=validated_data['industryName'])
-    #     except ObjectDoesNotExist:
-    #         # else, we create a new tag with the given value
-    #         return super(JobIndustrySerializer, self).create(validated_data)
-    
-
-
-=======
->>>>>>> 813aeef8fc55d865ea01ce89879118d6cabd0f7f
 #with default create method.
 class JobSerializer(WritableNestedModelSerializer,serializers.ModelSerializer):
 

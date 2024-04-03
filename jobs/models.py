@@ -10,8 +10,6 @@ JOB_TYPE = [
     ("INTERNSHIP", "internship"),
 ]
 
-<<<<<<< HEAD
-=======
 APPLICATION_STATUS = [
     ("IN REVIEW","in review"),
     ("APPROVED","approved"),
@@ -26,7 +24,6 @@ class JobIndustry(models.Model):
 
     def __str__(self):
         return self.industryName
->>>>>>> 813aeef8fc55d865ea01ce89879118d6cabd0f7f
 
 class JobModel(models.Model):
     user = models.ForeignKey(UserModel,on_delete=models.CASCADE,related_name="jobCreator",null=True)
@@ -35,16 +32,10 @@ class JobModel(models.Model):
     jobDescription = models.TextField()
     jobRequirements = models.TextField()
     location = models.CharField(max_length=100)
-<<<<<<< HEAD
-    jobType = models.CharField(max_length=20, choices=JOB_TYPE, default="full_time")
-    benefits = models.TextField()
-    salary = models.CharField(max_length=100, blank=True, null=True)
-=======
     jobIndustry = models.ForeignKey(JobIndustry,on_delete=models.CASCADE,related_name="jobIndustry")
     jobType = models.CharField(max_length=20,choices=JOB_TYPE,default="full_time")
     benefits = models.TextField()
     salary = models.CharField(max_length=100, blank=True, null=True) 
->>>>>>> 813aeef8fc55d865ea01ce89879118d6cabd0f7f
     applicationInstructions = models.TextField()
     contactInformation = models.TextField()
     publishedDate = models.DateTimeField(auto_now_add=True)
@@ -55,14 +46,6 @@ class JobModel(models.Model):
         return f"{self.jobTitle} - {self.company}"
 
 
-<<<<<<< HEAD
-class JobIndustry(models.Model):
-    industryName = models.CharField(max_length=20)
-    jobs = models.ForeignKey(JobModel, on_delete=models.CASCADE, related_name="jobIndustry",default=None)
-
-    def __str__(self):
-        return self.industryName
-=======
 
 class ApplicationModel(models.Model):
     job = models.ForeignKey(JobModel,on_delete=models.CASCADE,related_name="job_application",null=True)
@@ -75,4 +58,3 @@ class ApplicationModel(models.Model):
 
     
     
->>>>>>> 813aeef8fc55d865ea01ce89879118d6cabd0f7f
